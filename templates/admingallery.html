@@ -1,0 +1,113 @@
+{% extends 'admincommon.html' %}
+{% block content %}
+<section class="banner" style="height: 5vh;" data-scroll-index='0'>
+    <div class="banner-overlay">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="text-white">Gallery Events</h1>
+            <p class="text-white">Galleryhome /<b>Events</b> </p>
+          </div>
+        </div>  
+      </div>
+    </div> 
+</section>
+
+<section class="about section-padding prelative" data-scroll-index='1'>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-center">Users</h2>
+            </div>
+        </div>
+        
+        <div class="col-lg-12 row">
+            {% for gallery in galleries %}
+                <div class="col-lg-4 my-3">
+                    <div class="card exhibition-card p-3">
+                        <div class="row">
+                            <!-- Event Image -->
+                            <div class="col-lg-12 mb-3">
+                                <img src="static/media/{{ gallery.image }}" class="w-100 rounded" alt="Event Image">
+                            </div>
+        
+                            <!-- Event Details -->
+                            <div class="col-lg-12">
+                                <h5 class="exhibition-title">{{ user.galleryname }}</h5>
+                                <p class="exhibition-description">{{ gallery.bio }}</p>
+                                <p><b>Owner:</b> {{ gallery.owner }}</p>
+                                <p><b>Contact:</b> {{ gallery.phone }}</p>
+                                <p><b>Email:</b> {{ gallery.email }}</p>
+                                <p><b>Address:</b> {{ gallery.address }}</p>
+                                <p><b>Manager:</b> {{ gallery.manager }}</p>
+                                <p><b>Launch date:</b> {{ gallery.launch_date }}</p>
+                               
+                            </div>
+        
+                            <!-- Posted On -->
+                            <div class="col-lg-12 mt-2">
+                                <p><b>Joined on:</b> {{ gallery.user.date_joined }}</p>
+                                {% if gallery.user.is_active %}
+                                    <a href="/toggleactive?id={{ gallery.user.id }}" style="font-size: 10px;" class="btn btn-danger mt-2">Deactivate</a>
+                                {% else %}
+                                    <a href="/toggleactive?id={{ gallery.user.id }}" style="font-size: 10px;" class="btn btn-success mt-2">Activate</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<style>
+    .exhibition-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .exhibition-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .exhibition-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+
+    .exhibition-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .exhibition-card img {
+        border-radius: 8px;
+        object-fit: cover;
+        height: 200px;
+    }
+
+    .card p {
+        font-size: 12px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .exhibition-card .col-lg-12 {
+        margin-bottom: 10px;
+    }
+
+    .exhibition-card .card {
+        padding: 20px;
+    }
+</style>
+
+{% endblock %}

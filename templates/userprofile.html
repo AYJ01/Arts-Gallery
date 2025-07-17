@@ -1,0 +1,42 @@
+{% extends page %}
+{% block content %}
+<section class="banner" style="height: 5vh;" data-scroll-index='0'>
+    <div class="banner-overlay">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="text-white">Customer Profile</h1>
+            <p class="text-white">Galleryhome /<b>Customer Profile</b> </p>
+          </div>
+        </div>  
+      </div>
+    </div> 
+</section>
+<section class="team section-padding" data-scroll-index='3'>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sectioner-header text-center">
+            <h3>Customer Profile</h3>
+            <span class="line"></span>
+            
+          </div>
+          <div class="section-content text-center">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="team-detail wow bounce" data-wow-delay="0.2s"> <img src="static/media/{{ user.image }}" style="object-fit: cover;height: 250px;width: 250px;" class="img-fluid"/>
+                  <h4>{{ user.username }}</h4>
+                  <p class="mx-5 my-auto" style="text-align: justify;">{{ user.bio }}</p>
+                  <p class="mx-5 my-auto" style="text-align: justify;"><b>Email : </b>{{ user.email }}</p>
+                  <p class="mx-5 my-auto" style="text-align: justify;"><b>Phone : </b>{{ user.phone }}</p>
+                  <p class="mx-5 my-auto" style="text-align: justify;"><b>Address : </b>{{ user.address }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}

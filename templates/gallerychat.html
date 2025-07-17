@@ -1,0 +1,181 @@
+
+{% extends "gallerycommon.html" %}
+{% block content %} 
+
+<section class="banner" style="height: 5vh;" data-scroll-index='0'>
+    <div class="banner-overlay">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="text-white">Chats</h1>
+            <p class="text-white">Galleryhome /<b>Chat</b> </p>
+          </div>
+        </div>  
+      </div>
+    </div> 
+</section>
+
+<div class="container-fluid content-top-gap">
+    <!-- Chatting Section -->
+    <div class="data-tables">
+        <div class="row">
+            <div class="col-lg-12 chart-grid mb-4">
+                <div class="card card_border p-4">
+                    <div class="card-header chart-grid__header d-flex justify-content-between align-items-center">
+                        <h4>Chatting</h4>
+                    </div>
+                    <div class="messaging">
+                        <div class="inbox_msg">
+                            
+                            <!-- Users List -->
+                            <div class="inbox_people" style="overflow-y: auto; border-right: 1px solid #ddd; padding: 10px;">
+                                <div class="headind_srch d-flex">
+                                    {% for artist in artists %}
+                                        <div class="p-2 align-items-center">
+                                            <img src="/static/media/{{ artist.image }}" class="m-auto" style="width:50px; height:50px; border-radius:50%;display: block;">
+                                            &nbsp;&nbsp;
+                                            <a href="agrecieverid?id={{ artist.id }}" class="text-dark text-center">{{ artist.username }}</a>
+                                        </div>
+                                        <hr />
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Messages Section -->
+                            <div class="mesgs" style=" padding: 10px;">
+                                {% if messages %}
+                                    <div class="msg_history">
+                                        {% for message in messages %}
+                                            {% if message.sender != 'artist' %}
+                                                <div class="incoming_msg d-flex align-items-center m-2">
+                                                    <div class="incoming_msg_img">
+                                                        <img src="/static/media/{{ artist.image }}" alt="" class="img-fluid" style="width: 40px; height: 40px; border-radius: 50%;">
+                                                    </div>
+                                                    <div class="received_msg">
+                                                        <div class="received_withd_msg">
+                                                            <p class="bg-light p-2 rounded">{{ message.message }}</p>
+                                                            <span class="time_date text-muted">{{ message.date | slice:"10:19" }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="outgoing_msg text-right m-2">
+                                                    <div class="sent_msg">
+                                                        <p class="bg-primary text-white p-2 rounded d-inline-block">{{ message.message }}</p>
+                                                        <br>
+                                                        <span class="time_date text-muted">{{ message.date | slice:"10:19" }}</span>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+
+                                <!-- Message Input -->
+                                <div class="type_msg mt-3">
+                                    <div class="input_msg_write d-flex align-items-center">
+                                        <form method="post" class="w-100 d-flex">
+                                            {% csrf_token %}
+                                            <input type="text" name="msg" class="form-control write_msg" placeholder="Type a message" required />
+                                            <button type="submit" class="btn btn-primary ml-2 msg_send_btn">
+                                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if msg %}
+<script>
+  alert("{{msg}}");
+</script>
+{% endif %}
+
+
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+      scrollFunction()
+    };
+  
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("movetop").style.display = "block";
+      } else {
+        document.getElementById("movetop").style.display = "none";
+      }
+    }
+  
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+  <!-- /move top -->
+  
+  
+  <script src="/static/chat/js/jquery-3.3.1.min.js"></script>
+  <script src="/static/chat/js/jquery-1.10.2.min.js"></script>
+  
+  <!-- chart js -->
+  <script src="/static/chat/js/Chart.min.js"></script>
+  <script src="/static/chat/js/utils.js"></script>
+  <!-- //chart js -->
+  
+  <!-- Different scripts of charts.  Ex.Barchart, Linechart -->
+  <script src="/static/chat/js/bar.js"></script>
+  <script src="/static/chat/js/linechart.js"></script>
+  <!-- //Different scripts of charts.  Ex.Barchart, Linechart -->
+  
+  
+  <script src="/static/chat/js/jquery.nicescroll.js"></script>
+  <script src="/static/chat/js/scripts.js"></script>
+  
+  <!-- close script -->
+  <script>
+    var closebtns = document.getElementsByClassName("close-grid");
+    var i;
+  
+    for (i = 0; i < closebtns.length; i++) {
+      closebtns[i].addEventListener("click", function () {
+        this.parentElement.style.display = 'none';
+      });
+    }
+  </script>
+  <!-- //close script -->
+  
+  <!-- disable body scroll when navbar is in active -->
+  <script>
+    $(function () {
+      $('.sidebar-menu-collapsed').click(function () {
+        $('body').toggleClass('noscroll');
+      })
+    });
+  </script>
+  <!-- disable body scroll when navbar is in active -->
+  
+   <!-- loading-gif Js -->
+   <script src="/static/chat/js/modernizr.js"></script>
+   <script>
+       $(window).load(function () {
+           // Animate loader off screen
+           $(".se-pre-con").fadeOut("slow");;
+       });
+   </script>
+   <!--// loading-gif Js -->
+  
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/static/chat/js/bootstrap.min.js"></script>
+  
+
+{% endblock %} 

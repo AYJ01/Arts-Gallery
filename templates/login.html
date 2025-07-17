@@ -1,0 +1,47 @@
+{% extends 'common.html' %}
+
+
+{% block content %}
+<section class="banner" style="height: 5vh;" data-scroll-index='0'>
+    <div class="banner-overlay">
+      <div class="container">
+        <center><h3 class="text-white" style="font-size: 34px;">Login</h3></center>
+        <center><p class="text-white mt-2">Home/<b>Login</b></p></center>
+      </div>
+    </div> </section>
+
+<section class="about section-padding prelative" data-scroll-index='1'>
+    <div class="container">
+        {% if success %}
+        <div class="alert alert-success fade-in" role="alert">
+            {{ success }}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger fade-in" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <div class="p-5">
+            <form  method="post"  data-aos="fade-up" data-aos-delay="500">
+                {% csrf_token %}
+                <div class="row gy-4">
+                    
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <input type="text" name="username" class="form-control w-100 mx-auto" placeholder="Your Email" required="">
+                  </div>
+            
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <input type="password" class="form-control w-100 mx-auto" name="password" placeholder="Your Password" required="">
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <center><button type="submit" class="btn-grad w-100 mx-auto">Submit</button></center>
+                  </div>
+            
+                </div>
+              </form>
+            </div>
+    </div>
+</section>
+
+{% endblock %}

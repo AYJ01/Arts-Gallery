@@ -1,0 +1,79 @@
+{% extends 'common.html' %}
+
+
+{% block content %}
+<section class="banner" style="height: 5vh;" data-scroll-index='0'>
+    <div class="banner-overlay">
+      <div class="container">
+        <center><h3 class="text-white" style="font-size: 34px;">Gallery Register</h3></center>
+        <center><p class="text-white mt-2">Home/<b>Gallery</b></p></center>
+      </div>
+    </div> </section>
+
+<section class="about section-padding prelative" data-scroll-index='1'>
+    <div class="container">
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+            {{ success }}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <div class="p-5">
+            <form  method="post"  data-aos="fade-up" enctype="multipart/form-data" data-aos-delay="500">
+                {% csrf_token %}
+                <div class="row gy-4">
+                    <div class="col-lg-7 col-12 mx-auto">
+                        <input type="text" name="username" class="form-control w-100 mx-auto" placeholder="Gallery Name" required="">
+                    </div>
+                    <div class="col-lg-7 col-12 mx-auto">
+                        <input type="text" name="ownername" class="form-control w-100 mx-auto" placeholder="Owner Name" required="">
+                    </div>
+                    <div class="col-lg-7 col-12 mx-auto">
+                        <input type="text" name="managername" class="form-control w-100 mx-auto" placeholder="Manager Name" required="">
+                    </div>
+                    <div class="col-lg-7 col-12 mx-auto">
+                        <select name="typeofgallery" class="form-control w-100 mx-auto mb-2" required>
+                            <option value="#" selected disabled>Choose Type</option>
+                            <option value="art">Art Gallery</option>
+                            <option value="photography">Photography Gallery</option>
+                            <option value="modern">Modern Gallery</option>
+                            <option value="historical">Historical Gallery</option>
+                            <option value="sculpture">Sculpture Gallery</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-7 col-12 mx-auto">
+                      <input type="text" name="contact" maxlength="10" class="form-control w-100 mx-auto" placeholder="Gallery Contact" required="">
+                    </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <input type="text" name="email" class="form-control w-100 mx-auto" placeholder="Gallery Email" required="">
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <input type="file" name="image" class="form-control w-100 mx-auto" placeholder="Gallery Image" required="">
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <input type="date" name="ldate" class="form-control w-100 mx-auto" placeholder="Launch Date" required="">
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <textarea name="address" class="form-control w-100 mx-auto my-2" placeholder="Gallery Address" required ></textarea>
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <textarea name="bio" class="form-control w-100 mx-auto my-2" placeholder="Gallery Bio" required></textarea>
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">   
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control w-100 mx-auto" name="password" placeholder="Your Password" required="">
+                  </div>
+                  <div class="col-lg-7 col-12 mx-auto">
+                    <center><button type="submit" class="btn-grad w-100 mx-auto">Register</button></center>
+                  </div>
+            
+                </div>
+              </form>
+            </div>
+    </div>
+</section>
+
+{% endblock %}
